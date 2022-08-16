@@ -10,6 +10,7 @@ jobs:
       uses: actions/checkout@master
     - name: set-env
       run: |
+        echo -e "Total CPU cores\t: $(nproc)"
         sudo apt update
         sudo apt install build-essential gawk gcc-multilib flex git gettext libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev
     - name: download-and
@@ -22,12 +23,14 @@ jobs:
         git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
         sed -i 's/# CONFIG_ALL .*/CONFIG_ALL=y/' .config
         ./scripts/feeds update -a && ./scripts/feeds install -a
-        make download -j
+        make download -j$(nproc)
+        make tools/install -j$(nproc)
+        make toolchain/install -j$(nproc)
     - name: compile-packages
       run: |
         pwd
         cd openwrt-18.06
-        make package/compile -i -j72 V=99
+        make package/compile -i -j$(nproc) V=99
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
