@@ -1,5 +1,5 @@
 CONFIG_ALL=y
-IGNORE_ERRORS=m
+IGNORE_ERRORS="n m"
 CONFIG_TARGET_siflower=y
 CONFIG_TARGET_siflower_sf19a28_fullmask=y
 CONFIG_TARGET_siflower_sf19a28_fullmask_SF19A28-GL-SFT1200=y
