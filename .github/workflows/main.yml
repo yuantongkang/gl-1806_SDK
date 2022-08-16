@@ -14,6 +14,7 @@ jobs:
         sudo apt install build-essential gawk gcc-multilib flex git gettext libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev
     - name: download-and
       run: |
+        echo -e "Total CPU cores\t: $(nproc)"
         cd openwrt-18.06
         pwd
         mv .config.sft1200 .config
