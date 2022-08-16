@@ -21,6 +21,8 @@ jobs:
         make download -j
     - name: compile-packages
       run: |
+        pwd
+        cd openwrt-18.06
         make package/compile -i -j V=99
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
