@@ -17,6 +17,8 @@ jobs:
         cd openwrt-18.06
         pwd
         mv .config.sft1200 .config
+        rm -rf package/helloworld
+        git clone --depth=1 https://github.com/fw876/helloworld.git package/helloworld
         sed -i 's/# CONFIG_ALL .*/CONFIG_ALL=y/' .config
         ./scripts/feeds update -a && ./scripts/feeds install -a
         make download -j
