@@ -15,7 +15,8 @@ jobs:
     - name: download-and
       run: |
         cd openwrt-18.06
-        mv .confg.sf1200 .config
+        pwd
+        mv .config.sf1200 .config
         ./scripts/feeds update -a && ./scripts/feeds install -a
         make download && make V=99
     - name: Upload a Build Artifact
