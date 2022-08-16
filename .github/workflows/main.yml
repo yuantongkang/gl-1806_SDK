@@ -18,7 +18,10 @@ jobs:
         pwd
         mv .config.sf1200 .config
         ./scripts/feeds update -a && ./scripts/feeds install -a
-        make download && make V=99
+        make download -j
+    - name: compile-packages
+      run: |
+        make package/compile -i -j V=99
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
