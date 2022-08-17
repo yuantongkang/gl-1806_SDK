@@ -27,6 +27,11 @@ jobs:
         make download -j$(nproc)
         make tools/install -j$(nproc)
         make toolchain/install -j$(nproc)
+    - uses: actions/cache@v3
+      id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      with:
+        path: openwrt-18.06/bin
+        key: 123
     - name: compile-packages
       run: |
         pwd
