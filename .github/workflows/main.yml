@@ -19,9 +19,11 @@ jobs:
         cd openwrt-18.06
         pwd
         mv .config.sft1200 .config
-        rm -rf package/helloworld
+        sed -i "/helloworld/d" "feeds.conf.default"
+        echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
         sed -i 's/# CONFIG_ALL .*/CONFIG_ALL=y/' .config
-        ./scripts/feeds update -a && ./scripts/feeds install custom
+        ./scripts/feeds update helloworld
+        ./scripts/feeds install -a -f -p helloworld
         make download -j$(nproc)
         make tools/install -j$(nproc)
         make toolchain/install -j$(nproc)
